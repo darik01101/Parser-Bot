@@ -8,6 +8,7 @@ from asyncio import run
 import aiohttp
 from bs4 import BeautifulSoup
 from aiogram.enums import ParseMode
+import ssl
 
 # Настройка логирования
 basicConfig(level=DEBUG)
@@ -49,14 +50,23 @@ async def repeat_infinity():
         await say_me_hello()
 
 async def fetch_data():
-    url = "https://quotes.toscrape.com/"  # Пример сайта с цитатами
+    url = "https://quotes.toscrape.com/"
+    print(1)
+    # Создаем контекст SSL с отключенной проверкой сертификатов
+    ssl_context = ssl.create_default_context()
+    ssl_context.check_hostname = False
+    ssl_context.verify_mode = ssl.CERT_NONE
+    print(2)
+
     async with aiohttp.ClientSession() as session:
-        async with session.get(url) as response:
+        async with session.get(url, ssl=ssl_context) as response:
+            print(3)
             html = await response.text()
             soup = BeautifulSoup(html, "html.parser")
             quotes = soup.find_all("span", class_="text")
-            return [quote.text for quote in quotes[:5]]  # Берем первые 5 цитат
-
+            print(4)
+            return [quote.text for quote in quotes[:5]]  # Берем первые 5 
+        
 # Обработчик команды /parse
 @dp.message(Command("parse"))
 async def parse_handler(message: Message):
