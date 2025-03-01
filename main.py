@@ -5,10 +5,7 @@ from dotenv import load_dotenv
 import os
 from logging import basicConfig, DEBUG
 from asyncio import run
-import aiohttp
-from bs4 import BeautifulSoup
 from aiogram.enums import ParseMode
-import ssl
 
 # Настройка логирования
 basicConfig(level=DEBUG)
@@ -48,31 +45,22 @@ async def say_me_hello():
 async def repeat_infinity():
     while True:
         await say_me_hello()
-
-async def fetch_data():
-    url = "https://quotes.toscrape.com/"
-    print(1)
-    # Создаем контекст SSL с отключенной проверкой сертификатов
-    ssl_context = ssl.create_default_context()
-    ssl_context.check_hostname = False
-    ssl_context.verify_mode = ssl.CERT_NONE
-    print(2)
-
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url, ssl=ssl_context) as response:
-            print(3)
-            html = await response.text()
-            soup = BeautifulSoup(html, "html.parser")
-            quotes = soup.find_all("span", class_="text")
-            print(4)
-            return [quote.text for quote in quotes[:5]]  # Берем первые 5 
         
 # Обработчик команды /parse
 @dp.message(Command("parse"))
 async def parse_handler(message: Message):
-    quotes = await fetch_data()
-    response_text = "\n\n".join(quotes)
-    await message.answer(f"Вот несколько цитат:\n\n{response_text}")
+    from requests import get
+    from bs4 import BeautifulSoup
+    from status import status_by_code
+    url = "https://ru.wikipedia.org/wiki/"
+    
+    # Отключаем проверку SSL-сертификатов
+    response = get(url, verify=False)
+    status_code = response.status_code
+    if status_code in status_by_code:
+        await message.answer(f"status: {status_code} - {status_by_code[status_code]}")
+    else:
+        await message.answer(f'получен неизвестный код: {status_code}')
 
 # Основная функция
 async def main():
