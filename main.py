@@ -52,15 +52,17 @@ async def parse_handler(message: Message):
     from requests import get
     from bs4 import BeautifulSoup
     from status import status_by_code
-    url = "https://ru.wikipedia.org/wiki/"
     message_text = message.text
     command,url = message_text.split()
     await message.answer(f'буду парсить {url}')
     # Отключаем проверку SSL-сертификатов
-    response = get(url, verify=False)
+    response = get(url)
     status_code = response.status_code
+    
     if status_code in status_by_code:
         await message.answer(f"status: {status_code} - {status_by_code[status_code]}")
+        html_code = response.text
+        await message.answer(html_code[:4000])
     else:
         await message.answer(f'получен неизвестный код: {status_code}')
 
