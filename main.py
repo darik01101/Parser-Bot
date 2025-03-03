@@ -17,7 +17,7 @@ if not API_KEY:
     raise ValueError("API_KEY не задан в .env файле")
 
 # Создаем бота, диспетчер и роутер
-bot = Bot(token=API_KEY, parse_mode=ParseMode.HTML)
+bot = Bot(token=API_KEY,)
 dp = Dispatcher()
 router = Router()
 
@@ -53,7 +53,9 @@ async def parse_handler(message: Message):
     from bs4 import BeautifulSoup
     from status import status_by_code
     url = "https://ru.wikipedia.org/wiki/"
-    
+    message_text = message.text
+    command,url = message_text.split()
+    await message.answer(f'буду парсить {url}')
     # Отключаем проверку SSL-сертификатов
     response = get(url, verify=False)
     status_code = response.status_code
