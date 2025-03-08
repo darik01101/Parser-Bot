@@ -45,7 +45,11 @@ async def say_me_hello():
 async def repeat_infinity():
     while True:
         await say_me_hello()
-        
+@dp.message(Command('site_analysis'))
+async def site_analysis(message: Message):
+    from key_words import KEY_WORDS
+    from parsing_sites import SITES
+    print(KEY_WORDS,SITES)
 # Обработчик команды /parse
 @dp.message(Command("parse"))
 async def parse_handler(message: Message):
