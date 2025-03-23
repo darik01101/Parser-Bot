@@ -20,6 +20,7 @@ status_by_code = {
     404: 'Not Found («не найдено»)',
     405: 'Method Not Allowed («метод не поддерживается»)',
     406: 'Not Acceptable («неприемлемо»)',
+    410: 'Gone (этой страницы больше не существует)',
     500: 'Internal Server Error («внутренняя ошибка сервера»)',
     501: 'Not Implemented («не реализовано»)',
     502: 'Bad Gateway («плохой, ошибочный шлюз»)',

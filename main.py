@@ -6,6 +6,7 @@ import os
 from logging import basicConfig, DEBUG
 from asyncio import run
 from aiogram.enums import ParseMode
+from requests import get
 
 # Настройка логирования
 basicConfig(level=DEBUG)
@@ -45,11 +46,25 @@ async def say_me_hello():
 async def repeat_infinity():
     while True:
         await say_me_hello()
+
+
 @dp.message(Command('site_analysis'))
 async def site_analysis(message: Message):
     from key_words import KEY_WORDS
+    from status import status_by_code
     from parsing_sites import SITES
-    print(KEY_WORDS,SITES)
+    for site_link in SITES:
+        response = get(site_link)
+        status_code = response.status_code
+        if status_code in status_by_code:
+            await message.answer(f"status: {status_code} - {status_by_code[status_code]}")
+            html_code = response.text
+            await message.answer(html_code[:4000])
+        else:
+            await message.answer(f'получен неизвестный код: {status_code}')
+            await message.answer(site_link)
+
+
 # Обработчик команды /parse
 @dp.message(Command("parse"))
 async def parse_handler(message: Message):
