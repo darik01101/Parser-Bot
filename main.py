@@ -60,13 +60,13 @@ async def site_analysis(message: Message):
         print(response_for_user)
         if response_for_user:
             await message.answer(response_for_user)
-        if status_code in status_by_code:
-            await message.answer(f"status: {status_code} - {status_by_code[status_code]}")
-            html_code = response.text
+        #if status_code in status_by_code:
+            #await message.answer(f"status: {status_code} - {status_by_code[status_code]}")
+            #html_code = response.text
             #await message.answer(html_code[:4000])
-        else:
-            await message.answer(f'получен неизвестный код: {status_code}')
-            await message.answer(site_link)
+        #else:
+            #await message.answer(f'получен неизвестный код: {status_code}')
+            #await message.answer(site_link)
 
 
 # Обработчик команды /parse
