@@ -9,7 +9,7 @@ from aiogram.enums import ParseMode
 from requests import get
 
 # Настройка логирования
-basicConfig(level=DEBUG)
+#basicConfig(level=DEBUG)
 
 # Загрузка токена из .env
 load_dotenv()
@@ -57,7 +57,7 @@ async def site_analysis(message: Message):
         response = get(site_link)
         status_code = response.status_code
         response_for_user =  parse_handler()
-        print(response_for_user)
+        #print(response_for_user)
         if response_for_user:
             await message.answer(response_for_user)
         #if status_code in status_by_code:
