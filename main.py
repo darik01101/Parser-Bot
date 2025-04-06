@@ -2,7 +2,7 @@ from aiogram.types import Message
 from aiogram import Bot, Dispatcher, Router
 from aiogram.filters import Command
 from dotenv import load_dotenv
-import os
+from os import getenv
 from logging import basicConfig, DEBUG
 from asyncio import run
 from aiogram.enums import ParseMode
@@ -13,7 +13,7 @@ from requests import get
 
 # Загрузка токена из .env
 load_dotenv()
-API_KEY = os.getenv("API_KEY")
+API_KEY = getenv("API_KEY")
 if not API_KEY:
     raise ValueError("API_KEY не задан в .env файле")
 
