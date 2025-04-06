@@ -22,9 +22,11 @@ def fl():
             html = response.text
             soup = BeautifulSoup(html,'html.parser')
             #for card in cards:
-            titles = soup.find_all(class_=title_class)
             descriptions = soup.find_all(class_=description_class)
-            print(descriptions)
+            titles = soup.find_all(class_=title_class)
+            
+            print(1,descriptions)
+            print(2,titles)
             for i in range(len(titles)):
                 cards.append({
                     'title':titles[i].get_text(strip=True),
