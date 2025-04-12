@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 def empty(): return ''
 def fl():
 
+
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
     }
@@ -25,11 +26,11 @@ def fl():
             descriptions = soup.find_all(class_=description_class)
             titles = soup.find_all(class_=title_class)
             
-            print(1,descriptions)
-            print(2,titles)
+            #print(1,descriptions)
+            #print(2,titles)
             for i in range(len(titles)):
                 cards.append({
-                    'title':titles[i].get_text(strip=True),
+                    #'title':titles[i].get_text(strip=True),
                     'description':descriptions[i].get_text(strip=True),
                 })
 
@@ -38,13 +39,35 @@ def fl():
             
             print(cards)
     return f'всего просмотрено страниц {start_page}'
+def utest():
+    base_url = "https://www.utest.com/api/v1/projects"
+    params = {
+    # Фильтр: только опубликованные проекты и только рекомендованные
+    "filter": '{"state":"published","suggested_projects":true}',
+
+    # Пагинация: страница 1
+    "page": 1,
+
+    # Количество проектов на странице
+    "per_page": 10,
+
+    # Сортировка: по убыванию даты обновления
+    "sort": "-updated_at"
+    }
+    response = get(base_url, params=params)
+    if response.ok:
+        data = response.json()
+        print(data)
+    else:
+        print("Ошибка запроса:", response.status_code, response.text)
+
 SITES = {
     r'https://profi.ru/': empty,
-    r'https://www.fl.ru/': fl,
+    r'https://www.fl.ru/': empty,#fl,
     r'https://www.weblancer.net/': empty,
     r'https://freelance.ru/': empty,
     r'https://kwork.ru/': empty,
-    r'https://www.utest.com/': empty,
+    r'https://www.utest.com/': utest,
     r'https://www.guru.com/pro/': empty,#нужен логин
     r'https://www.freelancer.com': empty,
     r'https://freelancer.testlio.com/': empty,#нужен логин
