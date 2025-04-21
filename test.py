@@ -1,0 +1,11 @@
+{
+    'current_user_permissions': {'index': True, 'read': True}, #запись доступна
+    'type': 'project',#тип задания
+    'title': 'Speak, and Shape Worlds: Arabic Voices Wanted! [Worldwide]',#название записи
+    'slug': 'Voice-Testing-MSA', #для создания ссылки
+    # тут содержание карточки
+    'content': '<div>We are seeking native Modern Standard Arabic speakers Worldwide with a passion for language, strong reading skills, expressiveness, and a keen eye for detail. We also need resilient individuals who can maintain focus during extended recording periods.&nbsp;&nbsp;</div>\n<div><br><strong>What you’ll be doing:<br></strong>\n<ul>\n<li>Participants will be required to read provided texts and record their voice.</li>\n<li>This involves focusing on clear pronunciation, expressive delivery, and accurate portrayal.</li>\n<li>Selected testers will go through a vetting process before advancing to the main project.</li>\n</ul>\n<strong>What we are looking for:<br></strong>\n<ul>\n<li>Detailed Focus: Demonstrating strong attention to detail and the ability to concentrate for extended periods.</li>\n<li>Captivating Delivery: Immersing themselves in texts to deliver engaging performances with clear pronunciation and expressive delivery.</li>\n<li>Remote Proficiency: Comfortably managing tasks independently in a quiet home office environment.</li>\n<li>Persistent Drive: Displaying resilience and determination to overcome challenges throughout the project.</li>\n</ul>\n<strong>Project details:</strong>\n<ul>\n<li><strong>Location:&nbsp;</strong>Worldwide</li>\n<li><strong>Duration:</strong>&nbsp;7 to 9 hours, flexible and divided into blocks.</li>\n<li><strong>Training Cycle:</strong>&nbsp;Selected testers will be invited to the paid training phase. Only those who meet the minimum requirements will advance to the main project.</li>\n<li><strong>Start Date:</strong>&nbsp;April/May.</li>\n<li><strong>Payout:&nbsp;</strong> $110 - $120. Earn $10 for every successful referral that completes the project!</li>\n</ul>\n<br>Passionate about language and a native speaker of Modern Standard Arabic? Apply now to shape the future of language technology!</div>',
+    'start_date': '2025-05-14',
+    'state': 'published',
+    'published_at': '2025-03-29T22:17:12.984Z',
+    'countries': ['Worldwide']},

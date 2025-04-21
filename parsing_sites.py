@@ -1,4 +1,5 @@
 from requests import get
+from key_words import KEY_WORDS
 from bs4 import BeautifulSoup
 def empty(): return ''
 def fl():
@@ -40,6 +41,21 @@ def fl():
             print(cards)
     return f'всего просмотрено страниц {start_page}'
 def utest():
+    PAYLOAD_FIELDS = [
+        'current_user_permissions',
+        'type',
+        'title',
+        'slug',
+        'content',
+        'start_date',
+        'state',
+        'published_at',
+        'countries'
+    ]
+    TEST_FIELDS = [
+        'title',
+        'content'
+    ]
     base_url = "https://www.utest.com/api/v1/projects"
     params = {
     # Фильтр: только опубликованные проекты и только рекомендованные
@@ -57,7 +73,30 @@ def utest():
     response = get(base_url, params=params)
     if response.ok:
         data = response.json()
-        print(data)
+        formatted_data = list(
+            map(
+                lambda record:
+                {k:v for k,v in record.items() if k in PAYLOAD_FIELDS},
+                data
+            )
+        )
+        test_data = list(
+            map(
+                lambda record:
+                {k:v for k,v in record.items() if k in TEST_FIELDS},
+                formatted_data
+            )
+        )    
+        for record in test_data:
+            title = record.get('title').lower()
+            content = record.get('content').lower()
+            for key_word in KEY_WORDS:
+                if key_word.lower() in title or key_word.lower() in content:
+                    print('нашли')
+                else:
+                    print('не нашли')
+
+
     else:
         print("Ошибка запроса:", response.status_code, response.text)
 
